@@ -10,11 +10,12 @@
 class Paddle
 {
 public:
+	Paddle() = default;
 	Paddle(const Vec2& pos_in, float halfWidth_in, float halfHeight_in);
 	void Draw(Graphics& gfx)const;
 	bool DoBallCollision(Ball& ball);
 	void DoWallCollision(const RectF& walls);
-	void Update(const Keyboard& kbd, float dt);
+	void Update(const Keyboard& kbd, float dt, int paddleNumber);
 	RectF GetRect()const;
 	void ResetCooldown();
 private:

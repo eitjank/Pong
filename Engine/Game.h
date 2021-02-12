@@ -47,7 +47,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	FrameTimer ft;
-	Paddle pad;
+	Paddle pad[2];
 	Walls walls;
 	Ball ball;
 	/********************************/

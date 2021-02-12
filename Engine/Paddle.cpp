@@ -23,7 +23,7 @@ void Paddle::Draw(Graphics& gfx) const
 
 bool Paddle::DoBallCollision(Ball& ball)
 {
-	if (!isCooldown)
+	//if (!isCooldown)
 	{
 		const RectF rect = GetRect();
 		if (rect.IsOverlappingWith(ball.GetRect()))
@@ -75,15 +75,30 @@ void Paddle::DoWallCollision(const RectF& walls)
 	}
 }
 
-void Paddle::Update(const Keyboard& kbd, float dt)
+void Paddle::Update(const Keyboard& kbd, float dt, int paddleNumber)
 {
-	if (kbd.KeyIsPressed(VK_UP))
+	
+	if (paddleNumber == 0)
 	{
-		pos.y -= speed * dt;
+		if (kbd.KeyIsPressed(0x57))
+		{
+			pos.y -= speed * dt;
+		}
+		if (kbd.KeyIsPressed(0x53))
+		{
+			pos.y += speed * dt;
+		}
 	}
-	if (kbd.KeyIsPressed(VK_DOWN))
+	else if (paddleNumber == 1)
 	{
-		pos.y += speed * dt;
+		if (kbd.KeyIsPressed(VK_UP))
+		{
+			pos.y -= speed * dt;
+		}
+		if (kbd.KeyIsPressed(VK_DOWN))
+		{
+			pos.y += speed * dt;
+		}
 	}
 }
 

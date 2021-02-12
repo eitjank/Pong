@@ -25,8 +25,8 @@ public:
 	Vec2 GetPosition()const;
 	void SetDirection(const Vec2& dir);
 private:
-	static constexpr float radius = 7.0f;
-	float speed = 200.0f;
+	static constexpr float radius = 12.0f;
+	float speed = 300.0f;
 	Vec2 pos;
 	Vec2 vel;
 };
