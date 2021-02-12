@@ -26,24 +26,29 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	walls(RectF({ 0,0 }, Graphics::ScreenWidth, Graphics::ScreenHeight)),
-	ball(Vec2(Graphics::ScreenWidth / 2, Graphics::ScreenHeight / 2), Vec2(-1.0f, 0.5f))
+	ball(Vec2(Graphics::ScreenWidth / 2, Graphics::ScreenHeight / 2), Vec2(-0.0f, -0.6f))
 {
 
-	pad[0] = Paddle(Vec2( 60,100 ), 7, 28);
-	pad[1] = Paddle(Vec2(600, 100), 7, 28);
+	pad[0] = Paddle(Vec2(400, 50 ), 28, 7);
+	pad[1] = Paddle(Vec2(400, 550), 28, 7);
 }
 
 void Game::Go()
 {
-	gfx.BeginFrame();	
-	UpdateModel();
+	gfx.BeginFrame();
+	float elapsedTime = ft.Mark();
+	while (elapsedTime > 0.0f)
+	{
+		const float dt = std::min(0.0025f, elapsedTime);
+		UpdateModel(dt);
+		elapsedTime -= dt;
+	}
 	ComposeFrame();
 	gfx.EndFrame();
 }
 
-void Game::UpdateModel()
+void Game::UpdateModel(float dt)
 {
-	const float dt = ft.Mark();
 	for (int i = 0;i < 2;i++)
 	{
 

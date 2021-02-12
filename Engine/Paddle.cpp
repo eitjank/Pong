@@ -29,6 +29,17 @@ bool Paddle::DoBallCollision(Ball& ball)
 		if (rect.IsOverlappingWith(ball.GetRect()))
 		{
 			const Vec2 ballPos = ball.GetPosition();
+			const float yDifference = ballPos.y - pos.y;
+
+			float upDown;
+			if (yDifference > 0.0f)
+			{
+				upDown = 1.0f;
+			}
+			else
+			{
+				upDown = -1.0f;
+			}
 
 			if (std::signbit(ball.GetVelocity().x) == std::signbit((ballPos - pos).x) || ballPos.x >= rect.left && ballPos.x <= rect.right)
 			{
@@ -36,18 +47,19 @@ bool Paddle::DoBallCollision(Ball& ball)
 				Vec2 dir;
 				if (std::abs(xDifference) < fixedZoneExitX)
 				{
+
 					if (xDifference < 0.0f)
 					{
-						dir = Vec2(-fixedZoneExitX, -1.0f);
+						dir = Vec2(-fixedZoneExitX, upDown);
 					}
 					else
 					{
-						dir = Vec2(fixedZoneExitX, -1.0f);
+						dir = Vec2(fixedZoneExitX, upDown);
 					}
 				}
 				else
 				{
-					dir = Vec2(xDifference * exitXFactor, -1.0f);
+					dir = Vec2(xDifference * exitXFactor, upDown);
 				}
 				ball.SetDirection(dir);
 			}
@@ -65,13 +77,13 @@ bool Paddle::DoBallCollision(Ball& ball)
 void Paddle::DoWallCollision(const RectF& walls)
 {
 	const RectF rect = GetRect();
-	if (rect.top < walls.top)
+	if (rect.left < walls.left)
 	{
-		pos.y += walls.top - rect.top;
+		pos.x += walls.left - rect.left;
 	}
-	else if (rect.bottom > walls.bottom)
+	else if (rect.right > walls.right)
 	{
-		pos.y -= rect.bottom - walls.bottom;
+		pos.x -= rect.right - walls.right;
 	}
 }
 
@@ -80,24 +92,24 @@ void Paddle::Update(const Keyboard& kbd, float dt, int paddleNumber)
 	
 	if (paddleNumber == 0)
 	{
-		if (kbd.KeyIsPressed(0x57))
+		if (kbd.KeyIsPressed(0x41))
 		{
-			pos.y -= speed * dt;
+			pos.x -= speed * dt;
 		}
-		if (kbd.KeyIsPressed(0x53))
+		if (kbd.KeyIsPressed(0x44))
 		{
-			pos.y += speed * dt;
+			pos.x += speed * dt;
 		}
 	}
 	else if (paddleNumber == 1)
 	{
-		if (kbd.KeyIsPressed(VK_UP))
+		if (kbd.KeyIsPressed(VK_LEFT))
 		{
-			pos.y -= speed * dt;
+			pos.x -= speed * dt;
 		}
-		if (kbd.KeyIsPressed(VK_DOWN))
+		if (kbd.KeyIsPressed(VK_RIGHT))
 		{
-			pos.y += speed * dt;
+			pos.x += speed * dt;
 		}
 	}
 }
