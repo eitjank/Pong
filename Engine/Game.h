@@ -47,9 +47,10 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	static constexpr int wallSideSpace = 120;
+	static constexpr int players = 1;
 	FrameTimer ft;
 	Paddle pad[2];
-	static constexpr int wallSideSpace = 120;
 	Walls walls;
 	Ball ball;
 	ScoreCounter sc[2];

@@ -28,8 +28,8 @@ Game::Game(MainWindow& wnd)
 	walls(RectF({ float(wallSideSpace), 0 }, Graphics::ScreenWidth - 2 * wallSideSpace, Graphics::ScreenHeight))
 {
 	ball.Reset();
-	pad[0] = Paddle(Vec2(400, 50 ), 34, 9);
-	pad[1] = Paddle(Vec2(400, 550), 34, 9);
+	pad[0] = Paddle(Vec2(400, 550), 34, 9);
+	pad[1] = Paddle(Vec2(400,  50), 34, 9);
 }
 
 void Game::Go()
@@ -48,10 +48,17 @@ void Game::Go()
 
 void Game::UpdateModel(float dt)
 {
+	for (int i = 0;i < players;i++)
+	{
+		pad[i].Update(wnd.kbd, dt, i);
+	}
+	if (players == 1)
+	{
+		pad[1].Control(dt, ball);
+	}
 	for (int i = 0;i < 2;i++)
 	{
 
-		pad[i].Update(wnd.kbd, dt, i);
 		pad[i].DoWallCollision(walls.rect);
 		pad[i].DoBallCollision(ball);
 	}

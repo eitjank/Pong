@@ -16,6 +16,7 @@ public:
 	bool DoBallCollision(Ball& ball);
 	void DoWallCollision(const RectF& walls);
 	void Update(const Keyboard& kbd, float dt, int paddleNumber);
+	void Control(float dt, Ball& ball);
 	RectF GetRect()const;
 private:
 	static constexpr float wingWidth = 2.0f;

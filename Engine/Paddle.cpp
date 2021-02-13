@@ -85,8 +85,18 @@ void Paddle::DoWallCollision(const RectF& walls)
 
 void Paddle::Update(const Keyboard& kbd, float dt, int paddleNumber)
 {
-	
 	if (paddleNumber == 0)
+	{
+		if (kbd.KeyIsPressed(VK_LEFT))
+		{
+			pos.x -= speed * dt;
+		}
+		if (kbd.KeyIsPressed(VK_RIGHT))
+		{
+			pos.x += speed * dt;
+		}
+	}
+	else if(paddleNumber == 1)
 	{
 		if (kbd.KeyIsPressed(0x41))
 		{
@@ -97,16 +107,17 @@ void Paddle::Update(const Keyboard& kbd, float dt, int paddleNumber)
 			pos.x += speed * dt;
 		}
 	}
-	else if (paddleNumber == 1)
+}
+
+void Paddle::Control(float dt, Ball& ball)
+{
+	if (pos.x < ball.GetPosition().x)
 	{
-		if (kbd.KeyIsPressed(VK_LEFT))
-		{
-			pos.x -= speed * dt;
-		}
-		if (kbd.KeyIsPressed(VK_RIGHT))
-		{
-			pos.x += speed * dt;
-		}
+		pos.x += speed * dt;
+	}
+	else if (pos.x > ball.GetPosition().x)
+	{
+		pos.x -= speed * dt;
 	}
 }
 
