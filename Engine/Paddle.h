@@ -20,8 +20,8 @@ public:
 	RectF GetRect()const;
 private:
 	static constexpr float wingWidth = 2.0f;
-	Color wingColor = { 190,185,185 };
-	Color color = { 200,195,195 };
+	Color wingColor = { 220,215,215 };
+	Color color = { 230,220,220 };
 	static constexpr float speed = 260.0f;
 	//paddle rebound behaviour
 	static constexpr float maximumExitRatio = 2.1f;//2.6

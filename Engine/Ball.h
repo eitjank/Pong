@@ -29,7 +29,7 @@ public:
 	void Reset();
 private:
 	static constexpr float radius = 9.0f;
-	float speed = 350.0f;
+	float speed = 340.0f;
 	Vec2 pos;
 	Vec2 vel;
 };

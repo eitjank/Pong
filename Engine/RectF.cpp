@@ -33,6 +33,12 @@ bool RectF::IsContainedBy(const RectF& other)
 		top >= other.top && bottom <= other.bottom;
 }
 
+bool RectF::Contains(const Vec2& vec) const
+{
+	return left <= vec.x && right >= vec.x &&
+		top <= vec.y && bottom >= vec.y;
+}
+
 RectF RectF::FromCenter(const Vec2& center, float halfWidth, float halfHeight)
 {
 	const Vec2 half(halfWidth,halfHeight);

@@ -28,9 +28,16 @@
 #include "Walls.h"
 #include "Ball.h"
 #include "ScoreCounter.h"
+#include "SelectionMenu.h"
 
 class Game
 {
+private:
+	enum class State
+	{
+		Selection,
+		Pong
+	};
 public:
 	Game( class MainWindow& wnd );
 	Game( const Game& ) = delete;
@@ -48,11 +55,13 @@ private:
 	/********************************/
 	/*  User Variables              */
 	static constexpr int wallSideSpace = 120;
-	static constexpr int players = 1;
+	int players = 1;
 	FrameTimer ft;
 	Paddle pad[2];
 	Walls walls;
 	Ball ball;
 	ScoreCounter sc[2];
+	SelectionMenu menu;
+	State state = State::Selection;
 	/********************************/
 };

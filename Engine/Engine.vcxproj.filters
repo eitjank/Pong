@@ -81,6 +81,9 @@
     <ClInclude Include="ScoreCounter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SelectionMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -132,6 +135,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ScoreCounter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectionMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
