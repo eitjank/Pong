@@ -2,6 +2,7 @@
 
 #include "Vec2.h"
 #include "Graphics.h"
+#include <random>
 
 class Ball
 {
@@ -25,6 +26,7 @@ public:
 	Vec2 GetVelocity()const;
 	Vec2 GetPosition()const;
 	void SetDirection(const Vec2& dir);
+	void Reset();
 private:
 	static constexpr float radius = 9.0f;
 	float speed = 400.0f;

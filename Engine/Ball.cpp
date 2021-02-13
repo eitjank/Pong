@@ -78,3 +78,23 @@ void Ball::SetDirection(const Vec2& dir)
 {
 	vel = dir.GetNormalized() * speed;
 }
+
+void Ball::Reset()
+{
+	std::random_device rd;
+	std::mt19937 rng(rd());
+	pos = Vec2(Graphics::ScreenWidth / 2, Graphics::ScreenHeight / 2);
+	std::uniform_real_distribution<float> xDir(-1.0f, 1.0f);
+	std::uniform_real_distribution<float> yDir(0.2f, 0.8f);
+	std::uniform_int_distribution<int> upOrDown(0, 1);
+	float ySide;
+	if (upOrDown(rng) == 0)
+	{
+		ySide = -1.0f;
+	}
+	else
+	{
+		ySide = 1.0f;
+	}
+	SetDirection(Vec2(xDir(rng),ySide* yDir(rng)));
+}

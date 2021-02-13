@@ -25,10 +25,9 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	walls(RectF({ float(wallSideSpace), 0 }, Graphics::ScreenWidth - 2 * wallSideSpace, Graphics::ScreenHeight)),
-	ball(Vec2(Graphics::ScreenWidth / 2, Graphics::ScreenHeight / 2), Vec2(-0.0f, -0.6f))
+	walls(RectF({ float(wallSideSpace), 0 }, Graphics::ScreenWidth - 2 * wallSideSpace, Graphics::ScreenHeight))
 {
-
+	ball.Reset();
 	pad[0] = Paddle(Vec2(400, 50 ), 34, 9);
 	pad[1] = Paddle(Vec2(400, 550), 34, 9);
 }
@@ -61,10 +60,12 @@ void Game::UpdateModel(float dt)
 	if (col == Ball::WallCollisions::Top)
 	{
 		sc[0].Add();
+		ball.Reset();
 	}
 	else if (col == Ball::WallCollisions::Bottom)
 	{
 		sc[1].Add();
+		ball.Reset();
 	}
 }
 
