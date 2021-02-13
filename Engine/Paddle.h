@@ -17,15 +17,14 @@ public:
 	void DoWallCollision(const RectF& walls);
 	void Update(const Keyboard& kbd, float dt, int paddleNumber);
 	RectF GetRect()const;
-	void ResetCooldown();
 private:
 	static constexpr float wingWidth = 2.0f;
 	Color wingColor = { 190,185,185 };
 	Color color = { 200,195,195 };
-	static constexpr float speed = 350.0f;
+	static constexpr float speed = 260.0f;
 	//paddle rebound behaviour
-	static constexpr float maximumExitRatio = 2.6f;
-	static constexpr float fixedZoneWitdthRatio = 0.1f;
+	static constexpr float maximumExitRatio = 2.1f;//2.6
+	static constexpr float fixedZoneWitdthRatio = 0.05f;//0.1
 	//these are derived from the above
 	float exitXFactor;
 	float fixedZoneHalfWidth;
@@ -34,5 +33,4 @@ private:
 	float halfWidth;
 	float halfHeight;
 	Vec2 pos;
-	bool isCooldown = false;
 };

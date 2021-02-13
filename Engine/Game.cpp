@@ -25,12 +25,12 @@ Game::Game(MainWindow& wnd)
 	:
 	wnd(wnd),
 	gfx(wnd),
-	walls(RectF({ 0,0 }, Graphics::ScreenWidth, Graphics::ScreenHeight)),
+	walls(RectF({ float(wallSideSpace), 0 }, Graphics::ScreenWidth - 2 * wallSideSpace, Graphics::ScreenHeight)),
 	ball(Vec2(Graphics::ScreenWidth / 2, Graphics::ScreenHeight / 2), Vec2(-0.0f, -0.6f))
 {
 
-	pad[0] = Paddle(Vec2(400, 50 ), 28, 7);
-	pad[1] = Paddle(Vec2(400, 550), 28, 7);
+	pad[0] = Paddle(Vec2(400, 50 ), 34, 9);
+	pad[1] = Paddle(Vec2(400, 550), 34, 9);
 }
 
 void Game::Go()
@@ -57,7 +57,15 @@ void Game::UpdateModel(float dt)
 		pad[i].DoBallCollision(ball);
 	}
 	ball.Update(dt);
-	ball.DoWallCollision(walls.rect);
+	Ball::WallCollisions col = ball.DoWallCollision(walls.rect);
+	if (col == Ball::WallCollisions::Top)
+	{
+		sc[0].Add();
+	}
+	else if (col == Ball::WallCollisions::Bottom)
+	{
+		sc[1].Add();
+	}
 }
 
 void Game::ComposeFrame()
@@ -66,5 +74,8 @@ void Game::ComposeFrame()
 	{
 		pad[i].Draw(gfx);
 	}
+	sc[0].Draw(Vec2(28, Graphics::ScreenHeight - 66), gfx);
+	sc[1].Draw(Vec2(28, 3), gfx);
 	ball.Draw(gfx);
+	walls.Draw(gfx);
 }

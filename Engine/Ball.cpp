@@ -25,20 +25,20 @@ Ball::WallCollisions Ball::DoWallCollision(const RectF& walls)
 	{
 		pos.x += walls.left - rect.left;
 		ReboundX();
-		collisionResult = WallCollisions::SideTop;
+		collisionResult = WallCollisions::Side;
 	}
 	else if (rect.right > walls.right)
 	{
 		pos.x -= rect.right - walls.right;
 		ReboundX();
-		collisionResult = WallCollisions::SideTop;
+		collisionResult = WallCollisions::Side;
 	}
 
 	if (rect.top < walls.top)
 	{
 		pos.y += walls.top - rect.top;
 		ReboundY();
-		collisionResult = WallCollisions::SideTop;
+		collisionResult = WallCollisions::Top;
 	}
 	else if (rect.bottom > walls.bottom)
 	{

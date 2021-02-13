@@ -27,6 +27,7 @@
 #include "Paddle.h"
 #include "Walls.h"
 #include "Ball.h"
+#include "ScoreCounter.h"
 
 class Game
 {
@@ -48,7 +49,9 @@ private:
 	/*  User Variables              */
 	FrameTimer ft;
 	Paddle pad[2];
+	static constexpr int wallSideSpace = 120;
 	Walls walls;
 	Ball ball;
+	ScoreCounter sc[2];
 	/********************************/
 };

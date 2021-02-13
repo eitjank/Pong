@@ -23,53 +23,49 @@ void Paddle::Draw(Graphics& gfx) const
 
 bool Paddle::DoBallCollision(Ball& ball)
 {
-	//if (!isCooldown)
+	const RectF rect = GetRect();
+	if (rect.IsOverlappingWith(ball.GetRect()))
 	{
-		const RectF rect = GetRect();
-		if (rect.IsOverlappingWith(ball.GetRect()))
+		const Vec2 ballPos = ball.GetPosition();
+		const float yDifference = ballPos.y - pos.y;
+
+		float upDown;
+		if (yDifference > 0.0f)
 		{
-			const Vec2 ballPos = ball.GetPosition();
-			const float yDifference = ballPos.y - pos.y;
+			upDown = 1.0f;
+		}
+		else
+		{
+			upDown = -1.0f;
+		}
 
-			float upDown;
-			if (yDifference > 0.0f)
+		if (std::signbit(ball.GetVelocity().x) == std::signbit((ballPos - pos).x) || ballPos.x >= rect.left && ballPos.x <= rect.right)
+		{
+			const float xDifference = ballPos.x - pos.x;
+			Vec2 dir;
+			if (std::abs(xDifference) < fixedZoneExitX)
 			{
-				upDown = 1.0f;
-			}
-			else
-			{
-				upDown = -1.0f;
-			}
 
-			if (std::signbit(ball.GetVelocity().x) == std::signbit((ballPos - pos).x) || ballPos.x >= rect.left && ballPos.x <= rect.right)
-			{
-				const float xDifference = ballPos.x - pos.x;
-				Vec2 dir;
-				if (std::abs(xDifference) < fixedZoneExitX)
+				if (xDifference < 0.0f)
 				{
-
-					if (xDifference < 0.0f)
-					{
-						dir = Vec2(-fixedZoneExitX, upDown);
-					}
-					else
-					{
-						dir = Vec2(fixedZoneExitX, upDown);
-					}
+					dir = Vec2(-fixedZoneExitX, upDown);
 				}
 				else
 				{
-					dir = Vec2(xDifference * exitXFactor, upDown);
+					dir = Vec2(fixedZoneExitX, upDown);
 				}
-				ball.SetDirection(dir);
 			}
 			else
 			{
-				ball.ReboundX();
+				dir = Vec2(xDifference * exitXFactor, upDown);
 			}
-			isCooldown = true;
-			return true;
+			ball.SetDirection(dir);
 		}
+		else
+		{
+			ball.ReboundX();
+		}
+		return true;
 	}
 	return false;
 }
@@ -117,9 +113,4 @@ void Paddle::Update(const Keyboard& kbd, float dt, int paddleNumber)
 RectF Paddle::GetRect() const
 {
 	return RectF::FromCenter(pos, halfWidth, halfHeight);
-}
-
-void Paddle::ResetCooldown()
-{
-	isCooldown = false;
 }

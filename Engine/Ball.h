@@ -9,7 +9,8 @@ public:
 	enum class WallCollisions
 	{
 		None,
-		SideTop,
+		Side,
+		Top,
 		Bottom
 	};
 public:
@@ -25,8 +26,8 @@ public:
 	Vec2 GetPosition()const;
 	void SetDirection(const Vec2& dir);
 private:
-	static constexpr float radius = 10.0f;
-	float speed = 300.0f;
+	static constexpr float radius = 9.0f;
+	float speed = 400.0f;
 	Vec2 pos;
 	Vec2 vel;
 };
