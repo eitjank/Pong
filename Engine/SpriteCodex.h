@@ -4,7 +4,9 @@
 class SpriteCodex
 {
 public:
-	static void DrawNumber(int number, Vec2& pos, Graphics& gfx);
+	static void DrawNumber(int number, const Vec2& pos, Graphics& gfx);
+	static void Draw1Player(const Vec2& pos, Graphics& gfx);
+	static void Draw2Players(const Vec2& pos, Graphics& gfx);
 private:
 	static constexpr int width = 42;
 	static constexpr int height = 63;

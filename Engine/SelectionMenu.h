@@ -17,8 +17,11 @@ public:
 	void Draw(Graphics& gfx)const;
 	Selection Contains(const Vec2& pos)const;
 private:
+	Vec2 topLeft[2];
 	RectF rect[2];
-	static constexpr int spacing = 70;
-	static constexpr int width = 220;
-	static constexpr int height = 45;
+	static constexpr float borderThickness = 3.0f;
+	static constexpr Color borderColor = Colors::LightGray;
+	static constexpr int spacing = 82;
+	static constexpr int width = 345;
+	static constexpr int height = 82;
 };
