@@ -26,6 +26,7 @@ bool Paddle::DoBallCollision(Ball& ball)
 	const RectF rect = GetRect();
 	if (rect.IsOverlappingWith(ball.GetRect()))
 	{
+		ball.SpeedUp();
 		const Vec2 ballPos = ball.GetPosition();
 		const float yDifference = ballPos.y - pos.y;
 
