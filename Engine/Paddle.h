@@ -6,12 +6,13 @@
 #include "Colors.h"
 #include "Graphics.h"
 #include "Keyboard.h"
+#include "GameSettings.h"
 
 class Paddle
 {
 public:
 	Paddle() = default;
-	Paddle(const Vec2& pos_in, float halfWidth_in, float halfHeight_in);
+	Paddle(const Vec2& pos_in, const GameSettings& settings);
 	void Draw(Graphics& gfx)const;
 	bool DoBallCollision(Ball& ball);
 	void DoWallCollision(const RectF& walls);
@@ -22,7 +23,7 @@ private:
 	static constexpr float wingWidth = 2.0f;
 	Color wingColor = { 220,215,215 };
 	Color color = { 230,220,220 };
-	static constexpr float speed = 260.0f;
+	float speed = 260.0f;
 	//paddle rebound behaviour
 	static constexpr float maximumExitRatio = 2.1f;//2.6
 	static constexpr float fixedZoneWitdthRatio = 0.05f;//0.1

@@ -29,6 +29,7 @@
 #include "Ball.h"
 #include "ScoreCounter.h"
 #include "SelectionMenu.h"
+#include "GameSettings.h"
 
 class Game
 {
@@ -54,8 +55,9 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	GameSettings settings = ("Settings.txt");
 	static constexpr int wallSideSpace = 120;
-	int players = 1;
+	int players;
 	FrameTimer ft;
 	Paddle pad[2];
 	Walls walls;

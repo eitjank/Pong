@@ -1,11 +1,12 @@
 #include "Paddle.h"
 #include <cmath>
 
-Paddle::Paddle(const Vec2& pos_in, float halfWidth_in, float halfHeight_in)
+Paddle::Paddle(const Vec2& pos_in, const GameSettings& settings)
 	:
 	pos(pos_in),
-	halfWidth(halfWidth_in),
-	halfHeight(halfHeight_in)
+	halfWidth(settings.GetPaddleHalfWidth()),
+	halfHeight(settings.GetPaddleHalfHeight()),
+	speed(settings.GetPaddleSpeed())
 {
 	exitXFactor = maximumExitRatio / halfWidth;
 	fixedZoneHalfWidth = halfWidth * fixedZoneWitdthRatio;

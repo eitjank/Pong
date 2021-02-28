@@ -3,6 +3,7 @@
 #include "Vec2.h"
 #include "Graphics.h"
 #include <random>
+#include "GameSettings.h"
 
 class Ball
 {
@@ -17,6 +18,7 @@ public:
 public:
 	Ball() = default;
 	Ball(const Vec2& pos_in, const Vec2& dir_in);
+	Ball(const GameSettings& settings);
 	void Draw(Graphics& gfx)const;
 	void Update(float dt);
 	WallCollisions DoWallCollision(const RectF& walls);
@@ -29,9 +31,9 @@ public:
 	void SpeedUp();
 	void Reset();
 private:
-	static constexpr float radius = 9.0f;
-	static constexpr float startingSpeed = 220.0f;
-	static constexpr float normalSpeed = 340.0f;
+	float radius = 9.0f;
+	float startingSpeed = 220.0f;
+	float normalSpeed = 340.0f;
 	float speed = startingSpeed;
 	Vec2 pos;
 	Vec2 vel;

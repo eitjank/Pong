@@ -7,6 +7,14 @@ Ball::Ball(const Vec2& pos_in, const Vec2& dir_in)
 	SetDirection(dir_in);
 }
 
+Ball::Ball(const GameSettings& settings)
+	:
+	radius(settings.GetBallRadius()),
+	startingSpeed(settings.GetBallStartingSpeed()),
+	normalSpeed(settings.GetBallSpeed())
+{
+}
+
 void Ball::Draw(Graphics& gfx) const
 {
 	gfx.DrawCircle(int(pos.x), int(pos.y), int(radius), Colors::Red);

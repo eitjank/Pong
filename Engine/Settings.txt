@@ -1,0 +1,17 @@
+[Ball radius]
+9
+
+[Ball speed]
+450
+
+[Ball starting speed]
+300
+
+[Paddle speed]
+320
+
+[Paddle width]
+68
+
+[Paddle height]
+18

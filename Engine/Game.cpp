@@ -26,11 +26,12 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	walls(RectF({ float(wallSideSpace), 0 }, Graphics::ScreenWidth - 2 * wallSideSpace, Graphics::ScreenHeight)),
-	menu(gfx)
+	menu(gfx),
+	ball(settings)
 {
 	ball.Reset();
-	pad[0] = Paddle(Vec2(400, 550), 34, 9);
-	pad[1] = Paddle(Vec2(400,  50), 34, 9);
+	pad[0] = Paddle(Vec2(400, 550), settings);
+	pad[1] = Paddle(Vec2(400,  50), settings);
 }
 
 void Game::Go()
@@ -85,7 +86,7 @@ void Game::UpdateModel(float dt)
 			const auto e = wnd.mouse.Read();
 			if (e.GetType() == Mouse::Event::Type::LPress)
 			{
-				const Vec2 mousePos = Vec2(e.GetPos().first,e.GetPos().second);
+				const Vec2 mousePos = Vec2(float(e.GetPos().first),float(e.GetPos().second));
 				const SelectionMenu::Selection sel = menu.Contains(mousePos);
 				if (sel == SelectionMenu::Selection::SinglePlayer)
 				{
